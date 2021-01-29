@@ -1,0 +1,27 @@
+"Smartling Tips" = "Smartling Tips";
+
+"Create a localization strategy and roadmap" = "Create a localization strategy and roadmap";
+
+"Put the user at the center of your localization strategy" = "Put the user at the center of your localization strategy";
+
+"Code your app for easy translation" = "Code your app for easy translation";
+
+"Adhere to platform best practices" = "Adhere to platform best practices";
+
+"Localize for each region for a truly native experience" = "Localize for each region for a truly native experience";
+
+"Leverage translation technology and specialized tools" = "Leverage translation technology and specialized tools";
+
+"Use an over-the-air service for translated content delivery" = "Use an over-the-air service for translated content delivery";
+
+"Tips" = "Tips";
+
+"About" = "About";
+
+// In each of the following strings, "fileName" is a placeholder that should not be editable by translators.
+
+"File %@ was being found." = "File %@ was being found.";
+
+"File {{fileName}} is being found." = "File {{fileName}} is being found.";
+
+"File @@fileName@@ will be found." = "File @@fileName@@ will be found.";
