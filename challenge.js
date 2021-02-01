@@ -3,25 +3,15 @@ const credentials = require('./resources/credentials.json');
 const formd = require('form-data');
 const fs = require('fs');
 const FileSaver = require('file-saver');
-const Blob = require('blob');
-// const URL = require('url');
 const FileReader = require('filereader');
 const blob = require('blob');
-const express = require('express');
-const app = express();
 const Window = require('window');
-
-// const div = window.document.createElement('div');
-const window = new Window();
-let fileReader = new window.FileReader()
 const JSZip = require("jszip");
-const zip = new JSZip();
-const { response } = require('express');
-const { Z_PARTIAL_FLUSH } = require('zlib');
 
-// const { url } = require('inspector');
-// const { stringify } = require('querystring');
-// const { finished } = require('form-data');
+
+const window = new Window();
+const fileReader = new window.FileReader()
+const zip = new JSZip();
 
 let form_data = new formd();
 
@@ -60,23 +50,14 @@ function refresh() {
             'Content-Type': 'application/json',
              'accepts': 'application/json',
           },
-          body: {
-              "refreshToken": 'eyJhbGciOiJSUzI1NiJ9.eyJqdGkiOiJlNDMyNzE1Ni1lM2JkLTRhMzUtOWM2Ni0zOWQzZWRjMGM2NzciLCJleHAiOjE2MTE5NzIzMjgsIm5iZiI6MCwiaWF0IjoxNjExOTUwNzI4LCJpc3MiOiJodHRwczovL3Nzby5zbWFydGxpbmcuY29tL2F1dGgvcmVhbG1zL1NtYXJ0bGluZyIsInN1YiI6ImY3NWMyM2RlLTIyMDktNDBmZC1hYzFiLTVjOWYzMGY4ZDBiYyIsInR5cCI6IlJlZnJlc2giLCJhenAiOiJhdXRoZW50aWNhdGlvbi1zZXJ2aWNlIiwic2Vzc2lvbl9zdGF0ZSI6IjIyZWM5MTdjLTI5OTMtNDRkOS05OWJkLTNiMTdhNTAzNGVkOSIsImNsaWVudF9zZXNzaW9uIjoiZWZjMzU1YjUtOTMzMS00YTYyLTkyODEtNzZlNjAxOTNiY2YwIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIlJPTEVfQVBJX1VTRVIiLCJ1c2VyIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsInZpZXctcHJvZmlsZSJdfX19.kg1q6tz_YuHgINj79JYbtq6-vyhZiPYgj0jF-ndlV48QYYQ6yzNNBjAynPUowEbwy3bPhuHibE8R2yTN9Nw2PJFjIazH7O8141EnSUBRdYOrddiQOWGxSAFOGE47-2VkZz-Zs_810z2v3pZd_YI9wrgBg6vNslkZr3HFeMyysEs'
-          }
+          body: JSON.stringify({
+              "refreshToken": "eyJhbGciOiJSUzI1NiJ9.eyJqdGkiOiJhNTM5NjM4NS0zNmU1LTRiZjItYWNhYS0zNTE1MTNlYTFhOGUiLCJleHAiOjE2MTIyNDQwMjUsIm5iZiI6MCwiaWF0IjoxNjEyMjIyNDI1LCJpc3MiOiJodHRwczovL3Nzby5zbWFydGxpbmcuY29tL2F1dGgvcmVhbG1zL1NtYXJ0bGluZyIsInN1YiI6ImY3NWMyM2RlLTIyMDktNDBmZC1hYzFiLTVjOWYzMGY4ZDBiYyIsInR5cCI6IlJlZnJlc2giLCJhenAiOiJhdXRoZW50aWNhdGlvbi1zZXJ2aWNlIiwic2Vzc2lvbl9zdGF0ZSI6ImJmYjgwMGY5LWJhYzAtNDBiNC1hMjAyLTg0Y2UxYzI2NWY4ZCIsImNsaWVudF9zZXNzaW9uIjoiNWVkZWQ1NWQtMTI5NS00NGFkLTg0ZGUtZjUyM2ZjNWVhMjBlIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIlJPTEVfQVBJX1VTRVIiLCJ1c2VyIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsInZpZXctcHJvZmlsZSJdfX19.Xk0X11Qy_IZPH9j0vtuM8tmy00vQkiTmBGmrh-7N0yiT8d_yQ8UUOHcPenfxyL-hKDG7GeEEOkso__lc0EZ-WWSt7CS3eEBlKXXpTVNtsFVncaIVrY9hgJgivbHh8lFN-A-P343kLyVpw2PuxrjNJc9Y_VAu_6P3S8d2Y0PQPZE"
+          })
     }) 
-    .then(response => { if (response.code !== "SUCCESS"){
-        console.log(response)
-    }
-    response.json()})
+    .then(response => {response.json()})
     .then(response => {
-        console.log("from auth", response.data)
-        
-        // uploadFile(token);
+        console.log("from auth", response)
       })
-}
-
-function tester() {
-    console.log(strfile)
 }
 
 function uploadFile() {
@@ -133,11 +114,8 @@ function contextMatching() {
     
 }
 
-// const fileStream = fs.createWriteStream("translate.zip")
- 
-
 function projectDetails(){
-    let token = 'eyJhbGciOiJSUzI1NiJ9.eyJqdGkiOiI5Y2ZhNmY1ZC0xNGRlLTQ0YjEtYmY5YS1kNzkyYWI0YTBlZmYiLCJleHAiOjE2MTIyMTMzMjAsIm5iZiI6MCwiaWF0IjoxNjEyMjEyODQwLCJpc3MiOiJodHRwczovL3Nzby5zbWFydGxpbmcuY29tL2F1dGgvcmVhbG1zL1NtYXJ0bGluZyIsImF1ZCI6ImF1dGhlbnRpY2F0aW9uLXNlcnZpY2UiLCJzdWIiOiJmNzVjMjNkZS0yMjA5LTQwZmQtYWMxYi01YzlmMzBmOGQwYmMiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJhdXRoZW50aWNhdGlvbi1zZXJ2aWNlIiwic2Vzc2lvbl9zdGF0ZSI6ImRiNGJkMzFkLWUwMjgtNDA3Mi1iYjlmLWE4NTJkZTU3MzZjOCIsImNsaWVudF9zZXNzaW9uIjoiNmU0ZTk4OWMtYzcxYy00NzAwLTgzNTQtNjgzMWE3NTFkZWIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIlJPTEVfQVBJX1VTRVIiLCJ1c2VyIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsInZpZXctcHJvZmlsZSJdfX0sInVpZCI6Ijc0ODU5OTdjYzJmYyIsIm5hbWUiOiJNYWxjb2xtIFN0YXNvIFBSRSIsInByZWZlcnJlZF91c2VybmFtZSI6ImFwaVVzZXIrcHJvamVjdCthM2M3NTlkZTdAc21hcnRsaW5nLmNvbSIsImdpdmVuX25hbWUiOiJBUEkgVXNlciIsImZhbWlseV9uYW1lIjoiTWFsY29sbSBTdGFzbyBQUkUiLCJlbWFpbCI6ImFwaVVzZXIrcHJvamVjdCthM2M3NTlkZTdAc21hcnRsaW5nLmNvbSJ9.gcESJFavQ4B2GdXHynNM0Ub_AWfkPaJvu3yOQmzPXmCt1-ayiLbNZameY2g_Kn6UyfnbToT9kN536qb4zhoJk_wSaPXnlnvabAbHl4qG2NJCQvIm5Kg_B4WPwl1lNr13FkRarCcT1ny6rthJ74UuFA7BOwCwwy6v5fRTa3WhTUs'
+
     fetch(`https://api.smartling.com/projects-api/v2/projects/${credentials.projectId}`, {
         headers:{
             "Authorization": `Bearer ${token}`,
@@ -174,70 +152,48 @@ function str2bytes (str) {
 }
 
 function downloadFile() {
-    let token = 'eyJhbGciOiJSUzI1NiJ9.eyJqdGkiOiJkMmVkZTczZS1hMmNhLTRhYzMtYWQ4Ni0yMjYyYmRiZDk4YzAiLCJleHAiOjE2MTIyMTkyMzQsIm5iZiI6MCwiaWF0IjoxNjEyMjE4NzU0LCJpc3MiOiJodHRwczovL3Nzby5zbWFydGxpbmcuY29tL2F1dGgvcmVhbG1zL1NtYXJ0bGluZyIsImF1ZCI6ImF1dGhlbnRpY2F0aW9uLXNlcnZpY2UiLCJzdWIiOiJmNzVjMjNkZS0yMjA5LTQwZmQtYWMxYi01YzlmMzBmOGQwYmMiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJhdXRoZW50aWNhdGlvbi1zZXJ2aWNlIiwic2Vzc2lvbl9zdGF0ZSI6ImM2NmQxOWMxLTI5YjctNDZjMC1hMzhmLTQwOGRjMGM0NjM1ZiIsImNsaWVudF9zZXNzaW9uIjoiZDMwZWMyNjItNjY4YS00NjE5LTk5MDItZjU5YTYwMzJjODFjIiwiYWxsb3dlZC1vcmlnaW5zIjpbXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIlJPTEVfQVBJX1VTRVIiLCJ1c2VyIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsInZpZXctcHJvZmlsZSJdfX0sInVpZCI6Ijc0ODU5OTdjYzJmYyIsIm5hbWUiOiJNYWxjb2xtIFN0YXNvIFBSRSIsInByZWZlcnJlZF91c2VybmFtZSI6ImFwaVVzZXIrcHJvamVjdCthM2M3NTlkZTdAc21hcnRsaW5nLmNvbSIsImdpdmVuX25hbWUiOiJBUEkgVXNlciIsImZhbWlseV9uYW1lIjoiTWFsY29sbSBTdGFzbyBQUkUiLCJlbWFpbCI6ImFwaVVzZXIrcHJvamVjdCthM2M3NTlkZTdAc21hcnRsaW5nLmNvbSJ9.C9IyEtUK7dTdFdpxge4_-1GqCz5DxaRGdgfKz7RQEv5xXhrrZcE2Cq67lH_OUIw-eF2Rgd9eYTQww_hlVTAlh2LG6mrj-P60V_G28tkKPHTRUoqHXpHvqJZ1S1T_Zll0rXpplC_buYWaupYq6ITmLgQAolaxyfaklBduapTwSLY'
+    let token = 'eyJhbGciOiJSUzI1NiJ9.eyJqdGkiOiIzMGU5NTU0Zi1mOTQ5LTQzOTctYTU2Zi1jMTNhOGFhNDg2NjAiLCJleHAiOjE2MTIyMjE5NTEsIm5iZiI6MCwiaWF0IjoxNjEyMjIxNDcxLCJpc3MiOiJodHRwczovL3Nzby5zbWFydGxpbmcuY29tL2F1dGgvcmVhbG1zL1NtYXJ0bGluZyIsImF1ZCI6ImF1dGhlbnRpY2F0aW9uLXNlcnZpY2UiLCJzdWIiOiJmNzVjMjNkZS0yMjA5LTQwZmQtYWMxYi01YzlmMzBmOGQwYmMiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJhdXRoZW50aWNhdGlvbi1zZXJ2aWNlIiwic2Vzc2lvbl9zdGF0ZSI6ImVjNDE3ZTk0LTRlYWYtNDI5NS1hOTQyLTVlMjIzYWM5ODg2ZCIsImNsaWVudF9zZXNzaW9uIjoiNTU5NDFlMGYtZjg5YS00MmZlLTkyNDgtNGZlYmM1MWZlODM3IiwiYWxsb3dlZC1vcmlnaW5zIjpbXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIlJPTEVfQVBJX1VTRVIiLCJ1c2VyIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsInZpZXctcHJvZmlsZSJdfX0sInVpZCI6Ijc0ODU5OTdjYzJmYyIsIm5hbWUiOiJNYWxjb2xtIFN0YXNvIFBSRSIsInByZWZlcnJlZF91c2VybmFtZSI6ImFwaVVzZXIrcHJvamVjdCthM2M3NTlkZTdAc21hcnRsaW5nLmNvbSIsImdpdmVuX25hbWUiOiJBUEkgVXNlciIsImZhbWlseV9uYW1lIjoiTWFsY29sbSBTdGFzbyBQUkUiLCJlbWFpbCI6ImFwaVVzZXIrcHJvamVjdCthM2M3NTlkZTdAc21hcnRsaW5nLmNvbSJ9.c-inb_YqHu1uxflIVatZXNzns1NmyBZN7l36AgAbNGSjcLLus4MAyCfMyD4exWz0ipr7fTjp9CsMXNH_1H_Y3Ipp-kSGTiurIeffOVgqLU-z-5CTq7gLhg3oLhI4IVz_Az9RuT6w0W-s2CWZf6-9Wv5ebuimoKjvlU9oJg_Hpb4'
     fetch(`https://api.smartling.com/files-api/v2/projects/${credentials.projectId}/locales/all/file/zip?fileUri=./resources/localizable.strings`, {
         headers:{
             "Authorization": `Bearer ${token}`,
-            "Accept": 'application/zip',
+            "Accept": 'application/octet-stream',
+            "content-type": "application/octet-stream"
         }
     })
     .then(response => response.blob())
     .then(response => {
-        zip.file("translate.zip", response)
-
-    //    fs.writeFile("translation.zip", response,(err) => {
-    //     if (err) throw err;
-    //     console.log("success");
-    //   });
-        // let blob = new Blob ([new Uint8Array(response)])
-        // console.log(blob)
 
 
-    })
-      
-        // fs.createReadStream(response);
-     
 
+        // Tried the below methods and a few others but they did not recognize the reponse as a blob.  I tried changing the response to an ArrayBuffer as well but it was not recognized.
+
+        // ZIP
+        // zip.file("translate.zip", response)
+        // console.log(response)    
+
+        // FS
+        //        fs.writeFile("translation.zip", response,(err) => {
+        //     if (err) throw err;
+        //     console.log("success");
+        //   });       
+
+
+        // FILE READER
         // let newurl = fileReader.readAsDataURL(response)
-        // console.log(response.type, objecturl)
-        // 
-        // console.log(newurl)
-        // fs.createReadStream(newurl)
-        // fileReader.readAsBinaryString(response)
-        // readAsBinaryString()
-        // console.log(response.constructor.name === 'Blob')
-    //   let saveFile =  fs.createReadStream(response)
-        
-      
+        // console.log(response, newurl)
 
-        // response.arrayBuffer().then(response => fs.readFileSync(response))
-        // console.log(response)
-        // fs.createReadStream(response)
+        // URL
         // const newurl = URL.createObjectURL(response)
         // console.log(response.type)
-       
-            // let url = URL.createObjectURL(response)
-            // console.log(url)
-            // response.arrayBuffer().then(response => console.log(response))
-       
+
+
+    })       
     .catch(error => console.error(error))
 }
-
-function handleData() {
-   console.log(downloadFile())
-}
-
-// handleData()
-
-downloadFile()
-
-// accessToken: 'eyJhbGciOiJSUzI1NiJ9.eyJqdGkiOiJlNGEyNDEwZC00NTFmLTQ3ZDEtYmQyNy03NDE3MmU2ZGI4ZDMiLCJleHAiOjE2MTIxNDk5MjgsIm5iZiI6MCwiaWF0IjoxNjEyMTQ5NDQ4LCJpc3MiOiJodHRwczovL3Nzby5zbWFydGxpbmcuY29tL2F1dGgvcmVhbG1zL1NtYXJ0bGluZyIsImF1ZCI6ImF1dGhlbnRpY2F0aW9uLXNlcnZpY2UiLCJzdWIiOiJmNzVjMjNkZS0yMjA5LTQwZmQtYWMxYi01YzlmMzBmOGQwYmMiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJhdXRoZW50aWNhdGlvbi1zZXJ2aWNlIiwic2Vzc2lvbl9zdGF0ZSI6IjM2ZTRkOGVlLTdkZmEtNDE3OC1iMTExLTE2ZmNkODQ5MGVhNyIsImNsaWVudF9zZXNzaW9uIjoiYzQ5ODRlYjYtMjNlZC00MzhhLWIyZGMtMDg1ZTc4M2MxNGI0IiwiYWxsb3dlZC1vcmlnaW5zIjpbXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIlJPTEVfQVBJX1VTRVIiLCJ1c2VyIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsInZpZXctcHJvZmlsZSJdfX0sInVpZCI6Ijc0ODU5OTdjYzJmYyIsIm5hbWUiOiJNYWxjb2xtIFN0YXNvIFBSRSIsInByZWZlcnJlZF91c2VybmFtZSI6ImFwaVVzZXIrcHJvamVjdCthM2M3NTlkZTdAc21hcnRsaW5nLmNvbSIsImdpdmVuX25hbWUiOiJBUEkgVXNlciIsImZhbWlseV9uYW1lIjoiTWFsY29sbSBTdGFzbyBQUkUiLCJlbWFpbCI6ImFwaVVzZXIrcHJvamVjdCthM2M3NTlkZTdAc21hcnRsaW5nLmNvbSJ9.iOmfLiV2yf1MsstpCn2Dh5ELFEwqYHMYWlDyjBMotPU4W0pTPgwHSJhZY8mFHRkWXw6xjY9QHqVutCwBDIMuMCbk4FLvRPEuMk5u5GQZmEPlIiDsInyoOIwF9SBZABEz-Jhufltjn9sb-Fx52Iq35JAKjYVteuInI1caHqkjRNs'
-// refreshToken: 'eyJhbGciOiJSUzI1NiJ9.eyJqdGkiOiJiZDhjNzE0Mi04ZDJlLTQ1ODYtOWIxZC1mNTM5NmZiZGY4MDciLCJleHAiOjE2MTIxNDYzMjQsIm5iZiI6MCwiaWF0IjoxNjEyMTI0NzI0LCJpc3MiOiJodHRwczovL3Nzby5zbWFydGxpbmcuY29tL2F1dGgvcmVhbG1zL1NtYXJ0bGluZyIsInN1YiI6ImY3NWMyM2RlLTIyMDktNDBmZC1hYzFiLTVjOWYzMGY4ZDBiYyIsInR5cCI6IlJlZnJlc2giLCJhenAiOiJhdXRoZW50aWNhdGlvbi1zZXJ2aWNlIiwic2Vzc2lvbl9zdGF0ZSI6ImI3YTNhMjkwLTFiMTgtNDdkOS1hY2JmLTQ1YTVkZmNjOGYzOSIsImNsaWVudF9zZXNzaW9uIjoiNGEzMGI3OGQtZjRmMy00YTJhLWE3ZTMtYjI4ZmQ3Y2Q4YTY4IiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIlJPTEVfQVBJX1VTRVIiLCJ1c2VyIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsInZpZXctcHJvZmlsZSJdfX19.dudHpR1mfV9XgCZiwJnhgBWq7BWTJMzRGnBegfaxl5VDwZVhUoCYXtQGKB8OElq2Olse9LU22wkmnwKCfXI4BdOmRvKAnCMpU2rc7QCg2O49kEj2CNraHuIxVHRUubq0f1X1uG9Q1i3NJo0aktC5_Flq6tF4JJp3VceI-HZ6ggM'
-
-
-
 
 
 // contextUid: '30165a0b-bacd-4014-bcb4-e01bd85b2b1c'
 
 // matchId: '2db8c910-7ee9-4dda-aac6-da9f562bc686'
+
+refresh()
